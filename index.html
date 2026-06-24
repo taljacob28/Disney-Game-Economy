@@ -19,11 +19,7 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{
-    background:radial-gradient(1100px 560px at 78% -12%,#16223c 0%,var(--bg) 56%);
-    color:var(--ink); font-family:var(--disp); -webkit-font-smoothing:antialiased; line-height:1.5;
-    padding:28px 22px 52px;
-  }
+  body{background:radial-gradient(1100px 560px at 78% -12%,#16223c 0%,var(--bg) 56%);color:var(--ink);font-family:var(--disp);-webkit-font-smoothing:antialiased;line-height:1.5;padding:28px 22px 52px}
   .wrap{max-width:1120px;margin:0 auto}
   header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}
   .brand{display:flex;flex-direction:column;gap:5px}
@@ -39,7 +35,6 @@
   .card{background:linear-gradient(180deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--line);border-radius:16px;padding:22px}
   .card h2{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 16px}
 
-  /* mode toggle */
   .toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
   .toggle button{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 8px;cursor:pointer;transition:all .15s}
   .toggle button .sub{display:block;font-family:var(--mono);font-size:10px;font-weight:400;margin-top:2px;opacity:.7}
@@ -53,8 +48,7 @@
   #wheelRot{transition:transform 4.6s cubic-bezier(.15,.86,.27,1)}
   .feedback{font-family:var(--mono);font-size:14px;min-height:22px;text-align:center;color:var(--muted);margin:12px 0 2px;letter-spacing:.01em}
   .feedback .amt{color:var(--win);font-weight:700}
-  .feedback.jackpot .amt{color:var(--gold)}
-  .feedback.near{color:var(--gold)}
+  .feedback.jackpot .amt{color:var(--gold)} .feedback.near{color:var(--gold)}
 
   .spin-btn{width:100%;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.02em;color:#10131a;background:linear-gradient(180deg,#e3bb5e,#c39a3c);border:none;border-radius:12px;padding:15px;cursor:pointer;box-shadow:0 8px 22px rgba(201,161,74,.2);transition:transform .08s,filter .15s;margin-top:6px}
   .spin-btn:hover{filter:brightness(1.05)} .spin-btn:active{transform:translateY(1px)}
@@ -67,6 +61,19 @@
   .counter .cv.gold{color:var(--gold)}
   .counter .ck{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-top:3px}
 
+  /* wheel editor */
+  .editor{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+  .editor h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 10px}
+  .ehead,.erow{display:grid;grid-template-columns:14px 78px 1fr 46px;gap:9px;align-items:center}
+  .ehead{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:8px}
+  .erow{margin-bottom:7px}
+  .erow .dot{width:10px;height:10px;border-radius:2px;justify-self:center}
+  .erow .eprize{font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--inset);border:1px solid var(--line);border-radius:6px;padding:5px 6px;width:100%}
+  .erow .epct{font-family:var(--mono);font-size:11px;color:var(--gold);text-align:right}
+  .enote{font-family:var(--mono);font-size:10px;color:var(--muted2);margin:9px 0 11px;line-height:1.55}
+  .ereset{font-family:var(--mono);font-size:11px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:7px;padding:7px 12px;cursor:pointer;transition:border-color .15s,color .15s}
+  .ereset:hover{border-color:var(--gold);color:var(--gold)}
+
   /* economy */
   .sliders{display:flex;flex-direction:column;gap:13px;margin-bottom:18px;padding:14px;background:var(--bg2);border:1px solid var(--line);border-radius:12px}
   .srow{display:flex;flex-direction:column;gap:7px}
@@ -74,8 +81,8 @@
   .srow .sk{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .srow .sv{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold)}
   input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:3px;background:var(--line);outline:none;margin:0}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:17px;height:17px;border-radius:50%;background:var(--gold);cursor:pointer}
-  input[type=range]::-moz-range-thumb{width:17px;height:17px;border:none;border-radius:50%;background:var(--gold);cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--gold);cursor:pointer}
 
   .headline{display:flex;align-items:flex-end;gap:13px}
   .headline .num{font-family:var(--mono);font-weight:700;font-size:clamp(34px,5.4vw,50px);line-height:.9;color:var(--win);letter-spacing:-.02em}
@@ -107,13 +114,13 @@
     <div class="brand">
       <span class="eyebrow">Disney Solitaire · Economy Lab</span>
       <h1>Wheel of Fortune</h1>
-      <p class="lede">Pick a wheel and spin it. The <b>free</b> wheel is the daily retention faucet. The <b>paid</b> re-spin sells the upgrade at $1.99. The panel shows each wheel's payout distribution and what it earns.</p>
+      <p class="lede">Pick a wheel, spin it, and <b>edit the odds and prizes</b> to see how the payout distribution and the coins you inject change live.</p>
     </div>
-    <button class="reset" id="reset">reset</button>
+    <button class="reset" id="reset">reset all</button>
   </header>
 
   <div class="grid">
-    <!-- WHEEL -->
+    <!-- WHEEL + EDITOR -->
     <section class="card">
       <h2>The Wheel</h2>
       <div class="toggle">
@@ -135,6 +142,8 @@
         <div class="counter"><div class="cv gold" id="cSpent">$0.00</div><div class="ck">real spend</div></div>
         <div class="counter"><div class="cv gold" id="cJack">0</div><div class="ck">jackpots</div></div>
       </div>
+
+      <div class="editor" id="editor"></div>
     </section>
 
     <!-- ECONOMY -->
@@ -149,16 +158,16 @@
           <input type="range" id="sDau" min="100000" max="5000000" step="100000" value="1000000"></div>
       </div>
 
-      <div class="headline"><span class="num" id="hRev">$39,800</span><span class="pm" id="hRevM">/ day</span></div>
-      <div class="headline-label">re-spin revenue at <b id="hDau">1.0M</b> DAU and <b id="hConv">2%</b> conversion</div>
+      <div class="headline"><span class="num" id="hFaucet">15.59B</span><span class="pm">coins / day</span></div>
+      <div class="headline-label">soft currency injected at <b id="hDau">1.0M</b> DAU, one free spin each plus paid re-spins</div>
 
       <div class="stat-grid">
+        <div class="stat"><div class="k">Daily re-spin revenue</div><div class="v ok" id="sRev">$39.8K</div><div class="sub">DAU × conversion × price</div></div>
         <div class="stat"><div class="k">ARPDAU from re-spin</div><div class="v ok" id="sArpdau">$0.040</div><div class="sub">conversion × price</div></div>
-        <div class="stat"><div class="k">Paid value vs same-price coins</div><div class="v gold" id="sVsPack">−6%</div><div class="sub">near-fair, plus the jackpot</div></div>
+        <div class="stat"><div class="k">Paid value vs same-price coins</div><div class="v gold" id="sVsPack">−6%</div><div class="sub">live, from the paid EV</div></div>
         <div class="stat"><div class="k">Cash margin / paid spin</div><div class="v ok" id="sMargin">$1.99</div><div class="sub">coins cost ≈0 to mint</div></div>
-        <div class="stat"><div class="k">Coins minted / day</div><div class="v" id="sFaucet">15.59B</div><div class="sub">soft currency, watch inflation</div></div>
-        <div class="stat"><div class="k">Free wheel EV</div><div class="v" id="sFreeEv">15,030</div><div class="sub" id="sFreeEvD">~$1.00 · half a pack</div></div>
-        <div class="stat"><div class="k">Paid wheel EV</div><div class="v gold" id="sPaidEv">28,180</div><div class="sub">+88% vs free</div></div>
+        <div class="stat"><div class="k">Free wheel EV</div><div class="v" id="sFreeEv">15,030</div><div class="sub" id="sFreeEvD">~$1.00 per spin</div></div>
+        <div class="stat"><div class="k">Paid wheel EV</div><div class="v gold" id="sPaidEv">28,180</div><div class="sub" id="sPaidEvD">~$1.88 per spin</div></div>
       </div>
 
       <div class="chartblock">
@@ -180,9 +189,8 @@
   "use strict";
   var GOLD="#C9A14A", WA="#16264A", WB="#1B2E55", LINE="#26385C", INK="#ECEFF4", NAVY="#1A2D52", BAR="#33507e";
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var REF_RATE = 15000; // coins per $ (conservative $1.99-pack anchor)
+  var REF_RATE = 15000;
 
-  // wedges in clockwise order; jackpot flanked by the two next-biggest for the near-miss
   var FREE = [
     {label:"3K",  v:3000,   p:0.31},
     {label:"25K", v:25000,  p:0.08},
@@ -203,27 +211,21 @@
     {label:"30K", v:30000,  p:0.13},
     {label:"WILD",v:22000,  p:0.08,  wild:1}
   ];
+  var FREE_DEF=JSON.parse(JSON.stringify(FREE)), PREM_DEF=JSON.parse(JSON.stringify(PREM));
+
   function ev(w){var s=0;for(var i=0;i<w.length;i++)s+=w[i].v*w[i].p;return s;}
   function medianOf(w){
     var a=w.slice().sort(function(x,y){return x.v-y.v;}), c=0;
     for(var i=0;i<a.length;i++){c+=a[i].p; if(c>=0.5)return a[i].v;}
     return a[a.length-1].v;
   }
-  var FREE_EV=ev(FREE), PREM_EV=ev(PREM), FREE_MED=medianOf(FREE), PREM_MED=medianOf(PREM);
+  var FREE_EV, PREM_EV, FREE_MED, PREM_MED;
 
   function fmt(n){return Math.round(n).toLocaleString('en-US');}
   function money(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
-  function coinsShort(n){
-    if(n>=1e9)return (n/1e9).toFixed(2)+'B';
-    if(n>=1e6)return (n/1e6).toFixed(1)+'M';
-    if(n>=1e3)return (n/1e3).toFixed(0)+'K';
-    return fmt(n);
-  }
-  function dollarsShort(n){
-    if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';
-    if(n>=1e3)return '$'+(n/1e3).toFixed(1)+'K';
-    return '$'+fmt(n);
-  }
+  function coinsShort(n){ if(n>=1e9)return (n/1e9).toFixed(2)+'B'; if(n>=1e6)return (n/1e6).toFixed(1)+'M'; if(n>=1e3)return (n/1e3).toFixed(0)+'K'; return fmt(n); }
+  function dollarsShort(n){ if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M'; if(n>=1e3)return '$'+(n/1e3).toFixed(1)+'K'; return '$'+fmt(n); }
+  function shortLabel(v){ v=Math.round(v); return v>=1000? Math.round(v/1000)+'K' : ''+v; }
 
   // ---- wheel drawing ----
   var CX=160, CY=160, R=150, N=8, STEP=360/N;
@@ -234,14 +236,14 @@
       var a0=i*STEP, a1=(i+1)*STEP, p0=pt(R,a0), p1=pt(R,a1);
       var fill = w[i].jackpot?GOLD:(i%2?WA:WB);
       paths+='<path d="M'+CX+','+CY+' L'+p0.x.toFixed(2)+','+p0.y.toFixed(2)+' A'+R+','+R+' 0 0 1 '+p1.x.toFixed(2)+','+p1.y.toFixed(2)+' Z" fill="'+fill+'" stroke="'+LINE+'" stroke-width="1"/>';
+      var lab = w[i].wild?'WILD':shortLabel(w[i].v);
       var am=i*STEP+STEP/2, lp=pt(R*0.64,am), rot=(am>90&&am<270)?am+180:am;
       var tcol = w[i].jackpot?NAVY:(w[i].wild?GOLD:INK);
-      labels+='<g transform="translate('+lp.x.toFixed(2)+','+lp.y.toFixed(2)+') rotate('+rot.toFixed(1)+')"><text text-anchor="middle" dominant-baseline="central" font-family="var(--mono)" font-size="'+(w[i].jackpot?12.5:11.5)+'" font-weight="700" fill="'+tcol+'">'+w[i].label+'</text></g>';
+      labels+='<g transform="translate('+lp.x.toFixed(2)+','+lp.y.toFixed(2)+') rotate('+rot.toFixed(1)+')"><text text-anchor="middle" dominant-baseline="central" font-family="var(--mono)" font-size="'+(w[i].jackpot?12:11)+'" font-weight="700" fill="'+tcol+'">'+lab+'</text></g>';
     }
     var hub='<circle cx="160" cy="160" r="34" fill="#0C1322" stroke="'+GOLD+'" stroke-width="2"/>'+
             '<text x="160" y="156" text-anchor="middle" font-family="var(--mono)" font-size="10" letter-spacing="1" fill="'+GOLD+'">SPIN</text>'+
             '<text x="160" y="170" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="#93A0B8">&amp; WIN</text>';
-    // transform set inline at creation so no transition fires on redraw
     svg.innerHTML='<g id="wheelRot" style="transform-origin:160px 160px;transform:rotate('+deg+'deg)">'+paths+labels+'</g>'+hub;
   }
 
@@ -250,11 +252,9 @@
   var mode='free', curDeg=0, spinning=false;
   var spins=0, coinsWon=0, spent=0, jackpots=0;
   var price=1.99, conv=0.02, dau=1000000;
-
   function cfg(){ return mode==='paid'?PREM:FREE; }
-  drawWheel(wheelEl, FREE, 0);
 
-  function pick(w){ var r=Math.random(), c=0; for(var i=0;i<w.length;i++){c+=w[i].p; if(r<c)return i;} return w.length-1; }
+  function pick(w){ var r=Math.random()*w.reduce(function(s,d){return s+d.p;},0), c=0; for(var i=0;i<w.length;i++){c+=w[i].p; if(r<c)return i;} return w.length-1; }
 
   var fb=document.getElementById('feedback');
   var spinBtn=document.getElementById('spin');
@@ -267,6 +267,7 @@
     modePaidBtn.classList.toggle('active', m==='paid');
     spinBtn.innerHTML = (m==='paid') ? 'Spin <span class="cost">'+money(price)+'</span>' : 'Spin';
     drawWheel(wheelEl, cfg(), curDeg);
+    buildEditor();
     fb.className='feedback';
     fb.textContent = (m==='paid') ? 'Paid re-spin. Spin for a richer wheel.' : 'Free daily spin. Spin to win.';
   }
@@ -280,7 +281,7 @@
     document.getElementById('cSpins').textContent=spins;
     document.getElementById('cCoins').textContent=coinsShort(coinsWon);
     document.getElementById('cJack').textContent=jackpots;
-    var label = res.wild?'a Wildcard (~22,000 coins)':fmt(res.v)+' coins';
+    var label = res.wild?'a Wildcard (~'+fmt(res.v)+' coins)':fmt(res.v)+' coins';
     if(res.jackpot){ fb.className='feedback jackpot'; fb.innerHTML='JACKPOT &nbsp;<span class="amt">'+fmt(res.v)+' coins</span>'; }
     else if(res.near){ fb.className='feedback near'; fb.innerHTML='So close to the jackpot &nbsp;<span class="amt">'+fmt(res.v)+' coins</span>'; }
     else { fb.className='feedback'; fb.innerHTML='You won <span class="amt">'+label+'</span>'; }
@@ -296,7 +297,7 @@
     var delta=5*360 + (((desired-(curDeg%360))%360)+360)%360 + jitter;
     curDeg+=delta;
     var g=wheelEl.querySelector('#wheelRot');
-    g.getBoundingClientRect(); // commit current transform before animating
+    g.getBoundingClientRect();
     if(reduce){ g.style.transform='rotate('+curDeg+'deg)'; setTimeout(function(){ spinning=false; spinBtn.disabled=false; reward(w[i]); },120); return; }
     g.style.transform='rotate('+curDeg+'deg)';
     var done=false;
@@ -306,7 +307,51 @@
   }
   spinBtn.addEventListener('click',doSpin);
 
-  // ---- economy panel ----
+  // ---- wheel editor ----
+  var editorEl=document.getElementById('editor');
+  function buildEditor(){
+    var w=cfg(), html='<h3>Edit this wheel</h3><div class="ehead"><span></span><span>Prize (coins)</span><span>Win odds</span><span></span></div>';
+    for(var i=0;i<w.length;i++){
+      var jc = w[i].jackpot?GOLD:(i%2?WA:WB);
+      html+='<div class="erow">'+
+        '<span class="dot" style="background:'+jc+'"></span>'+
+        '<input class="eprize" type="number" min="0" step="1000" data-i="'+i+'" value="'+Math.round(w[i].v)+'">'+
+        '<input class="eprob" type="range" min="0" max="100" step="0.5" data-i="'+i+'" value="'+(w[i].p*100).toFixed(1)+'">'+
+        '<span class="epct" data-i="'+i+'">'+(w[i].p*100).toFixed(1)+'%</span>'+
+      '</div>';
+    }
+    html+='<div class="enote">Win odds auto-balance to 100%. Edit a prize or its odds and watch the distribution, EV, and coins minted update live.</div>';
+    html+='<button class="ereset" id="ereset">reset this wheel</button>';
+    editorEl.innerHTML=html;
+    Array.prototype.forEach.call(editorEl.querySelectorAll('.eprize'),function(inp){
+      inp.addEventListener('input',function(){ var i=+this.dataset.i; cfg()[i].v=Math.max(0,parseFloat(this.value)||0); drawWheel(wheelEl,cfg(),curDeg); refreshAll(); });
+    });
+    Array.prototype.forEach.call(editorEl.querySelectorAll('.eprob'),function(inp){
+      inp.addEventListener('input',function(){ setProb(+this.dataset.i, (parseFloat(this.value)||0)/100); });
+    });
+    document.getElementById('ereset').addEventListener('click',resetWheel);
+  }
+  function setProb(i,newP){
+    var w=cfg(), n=w.length; newP=Math.min(1,Math.max(0,newP));
+    var others=0, j; for(j=0;j<n;j++) if(j!==i) others+=w[j].p;
+    var rem=1-newP;
+    if(others<=1e-9){ for(j=0;j<n;j++) if(j!==i) w[j].p=rem/(n-1); }
+    else { for(j=0;j<n;j++) if(j!==i) w[j].p=w[j].p*(rem/others); }
+    w[i].p=newP;
+    syncEditor(); refreshAll();
+  }
+  function syncEditor(){
+    var w=cfg();
+    Array.prototype.forEach.call(editorEl.querySelectorAll('.eprob'),function(inp){ var i=+inp.dataset.i; if(document.activeElement!==inp) inp.value=(w[i].p*100).toFixed(1); });
+    Array.prototype.forEach.call(editorEl.querySelectorAll('.epct'),function(s){ var i=+s.dataset.i; s.textContent=(w[i].p*100).toFixed(1)+'%'; });
+  }
+  function resetWheel(){
+    var def = mode==='paid'?PREM_DEF:FREE_DEF, w=cfg();
+    for(var i=0;i<w.length;i++){ w[i].v=def[i].v; w[i].p=def[i].p; }
+    drawWheel(wheelEl,w,curDeg); buildEditor(); refreshAll();
+  }
+
+  // ---- economy ----
   var sPrice=document.getElementById('sPrice'), sConv=document.getElementById('sConv'), sDau=document.getElementById('sDau');
   function refreshEconomy(){
     price=parseFloat(sPrice.value); conv=parseFloat(sConv.value)/100; dau=parseInt(sDau.value,10);
@@ -315,66 +360,75 @@
     document.getElementById('vDau').textContent=(dau/1e6).toFixed(1)+'M';
     if(mode==='paid'){ spinBtn.innerHTML='Spin <span class="cost">'+money(price)+'</span>'; }
 
-    var rev=dau*conv*price;
-    document.getElementById('hRev').textContent=dollarsShort(rev);
+    var faucet=dau*(FREE_EV+conv*PREM_EV);
+    document.getElementById('hFaucet').textContent=coinsShort(faucet);
     document.getElementById('hDau').textContent=(dau/1e6).toFixed(1)+'M';
-    document.getElementById('hConv').textContent=(conv*100).toFixed(1)+'%';
 
+    document.getElementById('sRev').textContent=dollarsShort(dau*conv*price);
     document.getElementById('sArpdau').textContent='$'+(conv*price).toFixed(3);
     var vs=PREM_EV/(price*REF_RATE)-1;
     document.getElementById('sVsPack').textContent=(vs>=0?'+':'')+(vs*100).toFixed(0)+'%';
     document.getElementById('sMargin').textContent=money(price);
-    document.getElementById('sFaucet').textContent=coinsShort(dau*(FREE_EV+conv*PREM_EV));
     document.getElementById('sFreeEv').textContent=fmt(FREE_EV);
-    document.getElementById('sFreeEvD').textContent='~'+money(FREE_EV/REF_RATE)+' · half a pack';
+    document.getElementById('sFreeEvD').textContent='~'+money(FREE_EV/REF_RATE)+' per spin';
     document.getElementById('sPaidEv').textContent=fmt(PREM_EV);
+    document.getElementById('sPaidEvD').textContent='~'+money(PREM_EV/REF_RATE)+' per spin';
   }
   sPrice.addEventListener('input',refreshEconomy);
   sConv.addEventListener('input',refreshEconomy);
   sDau.addEventListener('input',refreshEconomy);
 
-  // ---- distribution charts (exact, from the wheel config) ----
+  // ---- distribution charts ----
   function sizeCanvas(cv,ctx){ var w=cv.clientWidth||440; cv.width=w*2; cv.height=150*2; ctx.setTransform(2,0,0,2,0,0); return w; }
-  function drawDist(cv, w){
+  function drawDist(cv,w){
     var ctx=cv.getContext('2d'), W=sizeCanvas(cv,ctx), H=150; ctx.clearRect(0,0,W,H);
-    var pad={l:8,r:8,t:12,b:24}, n=w.length;
+    var pad={l:8,r:8,t:14,b:24}, n=w.length;
+    var tot=w.reduce(function(s,d){return s+d.p;},0)||1;
     var order=w.map(function(d,i){return i;}).sort(function(a,b){return w[a].v-w[b].v;});
-    var max=0; for(var i=0;i<w.length;i++)max=Math.max(max,w[i].p);
+    var max=0; for(var i=0;i<n;i++)max=Math.max(max,w[i].p/tot);
+    if(max<=0)max=1;
     var bw=(W-pad.l-pad.r)/n, gap=bw*0.24;
     for(var k=0;k<n;k++){
-      var idx=order[k], h=(H-pad.t-pad.b)*(w[idx].p/max);
+      var idx=order[k], pn=w[idx].p/tot, h=(H-pad.t-pad.b)*(pn/max);
       var x=pad.l+k*bw+gap/2, y=H-pad.b-h, bwid=bw-gap;
       ctx.fillStyle = w[idx].jackpot?GOLD:BAR;
       ctx.fillRect(x,y,bwid,Math.max(h,2));
-      var pct=w[idx].p*100, plabel=(pct>=1?Math.round(pct):pct.toFixed(1))+'%';
+      var pct=pn*100, plabel=(pct>=1?Math.round(pct):pct.toFixed(1))+'%';
       ctx.fillStyle='#93A0B8'; ctx.font='9px "JetBrains Mono",monospace'; ctx.textAlign='center';
       ctx.fillText(plabel, x+bwid/2, y-4);
       ctx.fillStyle='#64718C';
-      ctx.fillText(w[idx].label, x+bwid/2, H-pad.b+13);
+      ctx.fillText(w[idx].wild?'WILD':shortLabel(w[idx].v), x+bwid/2, H-pad.b+13);
     }
     ctx.fillStyle='#26385C'; ctx.fillRect(pad.l,H-pad.b,W-pad.l-pad.r,1);
   }
   var histFree=document.getElementById('histFree'), histPaid=document.getElementById('histPaid');
-  function drawCharts(){ drawDist(histFree,FREE); drawDist(histPaid,PREM); }
 
-  // set chart captions (exact mean/median)
-  document.getElementById('metaFree').innerHTML='mean <b>'+fmt(FREE_EV)+'</b> · median <b>'+fmt(FREE_MED)+'</b>';
-  document.getElementById('metaPaid').innerHTML='mean <b>'+fmt(PREM_EV)+'</b> · median <b>'+fmt(PREM_MED)+'</b>';
+  function refreshAll(){
+    FREE_EV=ev(FREE); PREM_EV=ev(PREM); FREE_MED=medianOf(FREE); PREM_MED=medianOf(PREM);
+    refreshEconomy();
+    drawDist(histFree,FREE); drawDist(histPaid,PREM);
+    document.getElementById('metaFree').innerHTML='mean <b>'+fmt(FREE_EV)+'</b> · median <b>'+fmt(FREE_MED)+'</b>';
+    document.getElementById('metaPaid').innerHTML='mean <b>'+fmt(PREM_EV)+'</b> · median <b>'+fmt(PREM_MED)+'</b>';
+  }
 
-  // ---- reset ----
+  // ---- reset all ----
   document.getElementById('reset').addEventListener('click',function(){
+    for(var i=0;i<FREE.length;i++){ FREE[i].v=FREE_DEF[i].v; FREE[i].p=FREE_DEF[i].p; PREM[i].v=PREM_DEF[i].v; PREM[i].p=PREM_DEF[i].p; }
     spins=0;coinsWon=0;spent=0;jackpots=0;curDeg=0;spinning=false;
     document.getElementById('cSpins').textContent='0';
     document.getElementById('cCoins').textContent='0';
     document.getElementById('cSpent').textContent='$0.00';
     document.getElementById('cJack').textContent='0';
-    setMode('free');
+    setMode('free'); refreshAll();
     fb.className='feedback'; fb.textContent='Pick a wheel and spin.';
   });
 
-  window.addEventListener('resize',drawCharts);
-  refreshEconomy();
-  drawCharts();
+  window.addEventListener('resize',function(){ drawDist(histFree,FREE); drawDist(histPaid,PREM); });
+
+  // init
+  drawWheel(wheelEl, FREE, 0);
+  buildEditor();
+  refreshAll();
 })();
 </script>
 </body>
