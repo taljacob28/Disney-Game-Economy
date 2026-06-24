@@ -13,7 +13,7 @@
     --line:#26385C; --ink:#ECEFF4; --muted:#93A0B8; --muted2:#64718C;
     --gold:#C9A14A; --gold-soft:rgba(201,161,74,.14); --gold-line:rgba(201,161,74,.34);
     --win:#3FB984; --win-soft:rgba(63,185,132,.14); --inset:#070C16;
-    --wa:#16264A; --wb:#1B2E55;
+    --wa:#16264A; --wb:#1B2E55; --bar:#33507e;
     --disp:'Space Grotesk',system-ui,-apple-system,sans-serif;
     --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
   }
@@ -29,20 +29,23 @@
   .brand{display:flex;flex-direction:column;gap:5px}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
   h1{font-size:clamp(26px,3.4vw,40px);font-weight:700;letter-spacing:-.02em;margin:0;line-height:1.05}
-  .lede{color:var(--muted);font-size:14px;max-width:54ch;margin-top:7px}
+  .lede{color:var(--muted);font-size:14px;max-width:56ch;margin-top:7px}
   .lede b{color:var(--ink);font-weight:600}
   .reset{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 14px;cursor:pointer;transition:border-color .15s,color .15s}
   .reset:hover{border-color:var(--gold);color:var(--gold)}
 
-  .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
   @media (max-width:900px){.grid{grid-template-columns:1fr}}
   .card{background:linear-gradient(180deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .card h2{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 16px;display:flex;justify-content:space-between;align-items:center}
-  .mode-badge{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:5px 11px;border-radius:999px;text-transform:none}
-  .mode-free{color:var(--muted);background:var(--panel2);border:1px solid var(--line)}
-  .mode-prem{color:var(--gold);background:var(--gold-soft);border:1px solid var(--gold-line)}
+  .card h2{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 16px}
 
-  /* wheel */
+  /* mode toggle */
+  .toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .toggle button{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 8px;cursor:pointer;transition:all .15s}
+  .toggle button .sub{display:block;font-family:var(--mono);font-size:10px;font-weight:400;margin-top:2px;opacity:.7}
+  .toggle button:hover{color:var(--ink)}
+  .toggle button.active{color:var(--gold);background:var(--gold-soft);border-color:var(--gold-line)}
+
   .wheelwrap{display:flex;flex-direction:column;align-items:center;gap:2px}
   .wheelstage{position:relative;width:330px;height:344px;display:flex;align-items:flex-start;justify-content:center}
   .pointer{position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:3;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
@@ -53,32 +56,16 @@
   .feedback.jackpot .amt{color:var(--gold)}
   .feedback.near{color:var(--gold)}
 
-  .actions{display:flex;flex-direction:column;gap:9px;margin-top:6px}
-  .spin-btn{width:100%;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.02em;color:#10131a;background:linear-gradient(180deg,#e3bb5e,#c39a3c);border:none;border-radius:12px;padding:15px;cursor:pointer;box-shadow:0 8px 22px rgba(201,161,74,.2);transition:transform .08s,filter .15s}
+  .spin-btn{width:100%;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.02em;color:#10131a;background:linear-gradient(180deg,#e3bb5e,#c39a3c);border:none;border-radius:12px;padding:15px;cursor:pointer;box-shadow:0 8px 22px rgba(201,161,74,.2);transition:transform .08s,filter .15s;margin-top:6px}
   .spin-btn:hover{filter:brightness(1.05)} .spin-btn:active{transform:translateY(1px)}
   .spin-btn:disabled{background:#222c3e;color:var(--muted2);box-shadow:none;cursor:not-allowed}
-  .spin-btn .cost{font-family:var(--mono);font-weight:500;font-size:13px;opacity:.7;margin-left:7px}
-  .offer{border:1px solid var(--gold-line);background:var(--gold-soft);border-radius:12px;padding:13px 14px;display:none;flex-direction:column;gap:10px}
-  .offer.show{display:flex}
-  .offer-line{font-family:var(--mono);font-size:12.5px;color:var(--ink);line-height:1.5}
-  .offer-line b{color:var(--gold)}
-  .offer-btns{display:grid;grid-template-columns:1.4fr 1fr;gap:8px}
-  .buy-btn{font-family:var(--disp);font-weight:700;font-size:15px;color:#10131a;background:linear-gradient(180deg,#e3bb5e,#c39a3c);border:none;border-radius:10px;padding:13px 8px;cursor:pointer;transition:filter .15s}
-  .buy-btn:hover{filter:brightness(1.05)}
-  .skip-btn{font-family:var(--mono);font-size:13px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 8px;cursor:pointer;transition:color .15s,border-color .15s}
-  .skip-btn:hover{color:var(--ink);border-color:var(--muted2)}
+  .spin-btn .cost{font-family:var(--mono);font-weight:500;font-size:13px;opacity:.75;margin-left:7px}
 
   .counters{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
   .counter{text-align:center}
   .counter .cv{font-family:var(--mono);font-weight:700;font-size:17px;color:var(--ink)}
   .counter .cv.gold{color:var(--gold)}
   .counter .ck{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-top:3px}
-
-  .auto{border-top:1px solid var(--line);margin-top:14px;padding-top:14px;display:flex;flex-direction:column;gap:9px}
-  .auto-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}
-  .auto-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .auto-btns button{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:11px 6px;cursor:pointer;transition:border-color .15s,color .15s}
-  .auto-btns button:hover{border-color:var(--gold);color:var(--gold)}
 
   /* economy */
   .sliders{display:flex;flex-direction:column;gap:13px;margin-bottom:18px;padding:14px;background:var(--bg2);border:1px solid var(--line);border-radius:12px}
@@ -91,26 +78,26 @@
   input[type=range]::-moz-range-thumb{width:17px;height:17px;border:none;border-radius:50%;background:var(--gold);cursor:pointer}
 
   .headline{display:flex;align-items:flex-end;gap:13px}
-  .headline .num{font-family:var(--mono);font-weight:700;font-size:clamp(42px,6.4vw,64px);line-height:.9;color:var(--gold);letter-spacing:-.02em}
-  .headline .pm{font-family:var(--mono);font-size:13px;color:var(--muted);padding-bottom:8px}
+  .headline .num{font-family:var(--mono);font-weight:700;font-size:clamp(34px,5.4vw,50px);line-height:.9;color:var(--win);letter-spacing:-.02em}
+  .headline .pm{font-family:var(--mono);font-size:13px;color:var(--muted);padding-bottom:6px}
   .headline-label{font-size:13px;color:var(--muted);margin:5px 0 18px}
   .headline-label b{color:var(--ink);font-weight:600}
 
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
   .stat{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:12px 13px}
-  .stat .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
+  .stat .k{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2)}
   .stat .v{font-family:var(--mono);font-size:18px;font-weight:700;margin-top:5px}
-  .stat .v.ok{color:var(--win)} .stat .v.bad{color:#d2774f} .stat .v.gold{color:var(--gold)}
+  .stat .v.ok{color:var(--win)} .stat .v.gold{color:var(--gold)}
   .stat .sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
 
-  .chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-  .chart-title{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .chart-meta{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .chartblock{margin-bottom:16px}
+  .chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;gap:10px}
+  .chart-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .chart-meta{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right}
   .chart-meta b{color:var(--ink)}
   canvas{width:100%;display:block;border:1px solid var(--line);border-radius:11px;background:var(--inset)}
 
   footer{margin-top:22px;font-family:var(--mono);font-size:11px;color:var(--muted2);text-align:center;letter-spacing:.03em}
-  footer a{color:var(--muted)}
   @media (prefers-reduced-motion: reduce){ #wheelRot{transition:none} *{transition:none !important} }
 </style>
 </head>
@@ -120,7 +107,7 @@
     <div class="brand">
       <span class="eyebrow">Disney Solitaire · Economy Lab</span>
       <h1>Wheel of Fortune</h1>
-      <p class="lede">A free daily spin builds the habit. A <b>$1.99</b> premium re-spin sells the upgrade. Spin by hand to feel the near-miss, then simulate thousands of players to see where the economy really lands.</p>
+      <p class="lede">Pick a wheel and spin it. The <b>free</b> wheel is the daily retention faucet. The <b>paid</b> re-spin sells the upgrade at $1.99. The panel shows each wheel's payout distribution and what it earns.</p>
     </div>
     <button class="reset" id="reset">reset</button>
   </header>
@@ -128,40 +115,25 @@
   <div class="grid">
     <!-- WHEEL -->
     <section class="card">
-      <h2>The Wheel <span class="mode-badge mode-free" id="modeBadge">Free daily spin</span></h2>
+      <h2>The Wheel</h2>
+      <div class="toggle">
+        <button id="modeFree" class="active">Free wheel<span class="sub">daily spin</span></button>
+        <button id="modePaid">Paid re-spin<span class="sub">$1.99</span></button>
+      </div>
       <div class="wheelwrap">
         <div class="wheelstage">
           <svg class="pointer" width="26" height="30" viewBox="0 0 26 30"><polygon points="13,30 2,2 24,2" fill="#C9A14A" stroke="#0C1322" stroke-width="1.5"/></svg>
           <svg class="wheel" id="wheel" width="320" height="320" viewBox="0 0 320 320" role="img" aria-label="Prize wheel"></svg>
         </div>
-        <div class="feedback" id="feedback">Spin the free wheel to start the day.</div>
+        <div class="feedback" id="feedback">Pick a wheel and spin.</div>
       </div>
-
-      <div class="actions">
-        <button class="spin-btn" id="spinFree">Spin the free wheel<span class="cost">1 / day</span></button>
-        <div class="offer" id="offer">
-          <div class="offer-line" id="offerLine">Want another shot at the jackpot?</div>
-          <div class="offer-btns">
-            <button class="buy-btn" id="spinPrem">Spin premium · $1.99</button>
-            <button class="skip-btn" id="skip">New day</button>
-          </div>
-        </div>
-      </div>
+      <button class="spin-btn" id="spin">Spin</button>
 
       <div class="counters">
-        <div class="counter"><div class="cv" id="cDays">0</div><div class="ck">days</div></div>
+        <div class="counter"><div class="cv" id="cSpins">0</div><div class="ck">spins</div></div>
         <div class="counter"><div class="cv" id="cCoins">0</div><div class="ck">coins won</div></div>
         <div class="counter"><div class="cv gold" id="cSpent">$0.00</div><div class="ck">real spend</div></div>
         <div class="counter"><div class="cv gold" id="cJack">0</div><div class="ck">jackpots</div></div>
-      </div>
-
-      <div class="auto">
-        <span class="auto-label">Simulate many players (one free spin each, paid re-spin at the conversion rate)</span>
-        <div class="auto-btns">
-          <button data-n="1000">Run 1,000</button>
-          <button data-n="10000">Run 10,000</button>
-          <button data-n="100000">Run 100,000</button>
-        </div>
       </div>
     </section>
 
@@ -177,20 +149,26 @@
           <input type="range" id="sDau" min="100000" max="5000000" step="100000" value="1000000"></div>
       </div>
 
-      <div class="headline"><span class="num" id="hNum">28,180</span><span class="pm" id="hPm">coins · $1.88</span></div>
-      <div class="headline-label">expected value of one <b>premium</b> re-spin &nbsp;·&nbsp; free spin returns <b id="hFree">15,030</b></div>
+      <div class="headline"><span class="num" id="hRev">$39,800</span><span class="pm" id="hRevM">/ day</span></div>
+      <div class="headline-label">re-spin revenue at <b id="hDau">1.0M</b> DAU and <b id="hConv">2%</b> conversion</div>
 
       <div class="stat-grid">
-        <div class="stat"><div class="k">Free spin EV</div><div class="v" id="sFreeEv">15,030</div><div class="sub" id="sFreeEvD">~$1.00 · half the pack</div></div>
-        <div class="stat"><div class="k">Premium vs same-price coins</div><div class="v gold" id="sVsPack">−6%</div><div class="sub">near-fair, plus the jackpot</div></div>
-        <div class="stat"><div class="k">Daily re-spin revenue</div><div class="v ok" id="sRev">$39,800</div><div class="sub" id="sRevD">DAU × conversion × price</div></div>
-        <div class="stat"><div class="k">Coins injected / day</div><div class="v" id="sFaucet">15.59B</div><div class="sub">soft currency, watch inflation</div></div>
-        <div class="stat"><div class="k">Typical paid payout</div><div class="v" id="sMedian">—</div><div class="sub">median across the run</div></div>
-        <div class="stat"><div class="k">Mean − median gap</div><div class="v gold" id="sGap">—</div><div class="sub">the jackpot skew</div></div>
+        <div class="stat"><div class="k">ARPDAU from re-spin</div><div class="v ok" id="sArpdau">$0.040</div><div class="sub">conversion × price</div></div>
+        <div class="stat"><div class="k">Paid value vs same-price coins</div><div class="v gold" id="sVsPack">−6%</div><div class="sub">near-fair, plus the jackpot</div></div>
+        <div class="stat"><div class="k">Cash margin / paid spin</div><div class="v ok" id="sMargin">$1.99</div><div class="sub">coins cost ≈0 to mint</div></div>
+        <div class="stat"><div class="k">Coins minted / day</div><div class="v" id="sFaucet">15.59B</div><div class="sub">soft currency, watch inflation</div></div>
+        <div class="stat"><div class="k">Free wheel EV</div><div class="v" id="sFreeEv">15,030</div><div class="sub" id="sFreeEvD">~$1.00 · half a pack</div></div>
+        <div class="stat"><div class="k">Paid wheel EV</div><div class="v gold" id="sPaidEv">28,180</div><div class="sub">+88% vs free</div></div>
       </div>
 
-      <div class="chart-head"><span class="chart-title">Premium payouts across simulated spins</span><span class="chart-meta" id="chartMeta">run a simulation</span></div>
-      <canvas id="hist" height="170"></canvas>
+      <div class="chartblock">
+        <div class="chart-head"><span class="chart-title">Free wheel · payout distribution</span><span class="chart-meta" id="metaFree">mean <b>15,030</b> · median <b>6,000</b></span></div>
+        <canvas id="histFree" height="150"></canvas>
+      </div>
+      <div class="chartblock">
+        <div class="chart-head"><span class="chart-title">Paid wheel · payout distribution</span><span class="chart-meta" id="metaPaid">mean <b>28,180</b> · median <b>16,000</b></span></div>
+        <canvas id="histPaid" height="150"></canvas>
+      </div>
     </section>
   </div>
 
@@ -200,10 +178,11 @@
 <script>
 (function(){
   "use strict";
-  var GOLD="#C9A14A", WA="#16264A", WB="#1B2E55", LINE="#26385C", INK="#ECEFF4", NAVY="#1A2D52";
+  var GOLD="#C9A14A", WA="#16264A", WB="#1B2E55", LINE="#26385C", INK="#ECEFF4", NAVY="#1A2D52", BAR="#33507e";
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var REF_RATE = 15000; // coins per $ (conservative $1.99-pack anchor, matches the model)
+  var REF_RATE = 15000; // coins per $ (conservative $1.99-pack anchor)
 
+  // wedges in clockwise order; jackpot flanked by the two next-biggest for the near-miss
   var FREE = [
     {label:"3K",  v:3000,   p:0.31},
     {label:"25K", v:25000,  p:0.08},
@@ -225,9 +204,13 @@
     {label:"WILD",v:22000,  p:0.08,  wild:1}
   ];
   function ev(w){var s=0;for(var i=0;i<w.length;i++)s+=w[i].v*w[i].p;return s;}
-  var FREE_EV=ev(FREE), PREM_EV=ev(PREM);
+  function medianOf(w){
+    var a=w.slice().sort(function(x,y){return x.v-y.v;}), c=0;
+    for(var i=0;i<a.length;i++){c+=a[i].p; if(c>=0.5)return a[i].v;}
+    return a[a.length-1].v;
+  }
+  var FREE_EV=ev(FREE), PREM_EV=ev(PREM), FREE_MED=medianOf(FREE), PREM_MED=medianOf(PREM);
 
-  // ---- format helpers ----
   function fmt(n){return Math.round(n).toLocaleString('en-US');}
   function money(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
   function coinsShort(n){
@@ -245,7 +228,7 @@
   // ---- wheel drawing ----
   var CX=160, CY=160, R=150, N=8, STEP=360/N;
   function pt(r,aDeg){ var a=(aDeg-90)*Math.PI/180; return {x:CX+r*Math.cos(a), y:CY+r*Math.sin(a)}; }
-  function drawWheel(svg,w){
+  function drawWheel(svg,w,deg){
     var paths="", labels="";
     for(var i=0;i<w.length;i++){
       var a0=i*STEP, a1=(i+1)*STEP, p0=pt(R,a0), p1=pt(R,a1);
@@ -253,95 +236,75 @@
       paths+='<path d="M'+CX+','+CY+' L'+p0.x.toFixed(2)+','+p0.y.toFixed(2)+' A'+R+','+R+' 0 0 1 '+p1.x.toFixed(2)+','+p1.y.toFixed(2)+' Z" fill="'+fill+'" stroke="'+LINE+'" stroke-width="1"/>';
       var am=i*STEP+STEP/2, lp=pt(R*0.64,am), rot=(am>90&&am<270)?am+180:am;
       var tcol = w[i].jackpot?NAVY:(w[i].wild?GOLD:INK);
-      var fs = w[i].jackpot?12.5:11.5;
-      labels+='<g transform="translate('+lp.x.toFixed(2)+','+lp.y.toFixed(2)+') rotate('+rot.toFixed(1)+')"><text text-anchor="middle" dominant-baseline="central" font-family="var(--mono)" font-size="'+fs+'" font-weight="700" fill="'+tcol+'">'+w[i].label+'</text></g>';
+      labels+='<g transform="translate('+lp.x.toFixed(2)+','+lp.y.toFixed(2)+') rotate('+rot.toFixed(1)+')"><text text-anchor="middle" dominant-baseline="central" font-family="var(--mono)" font-size="'+(w[i].jackpot?12.5:11.5)+'" font-weight="700" fill="'+tcol+'">'+w[i].label+'</text></g>';
     }
     var hub='<circle cx="160" cy="160" r="34" fill="#0C1322" stroke="'+GOLD+'" stroke-width="2"/>'+
             '<text x="160" y="156" text-anchor="middle" font-family="var(--mono)" font-size="10" letter-spacing="1" fill="'+GOLD+'">SPIN</text>'+
             '<text x="160" y="170" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="#93A0B8">&amp; WIN</text>';
-    svg.innerHTML='<g id="wheelRot">'+paths+labels+'</g>'+hub;
-    var g=svg.querySelector('#wheelRot');
-    g.style.transformOrigin='160px 160px';
-    g.style.transform='rotate('+curDeg+'deg)';
+    // transform set inline at creation so no transition fires on redraw
+    svg.innerHTML='<g id="wheelRot" style="transform-origin:160px 160px;transform:rotate('+deg+'deg)">'+paths+labels+'</g>'+hub;
   }
 
   // ---- state ----
   var wheelEl=document.getElementById('wheel');
-  var curDeg=0, spinning=false, mode='free';
-  var days=0, coinsWon=0, spent=0, jackpots=0;
+  var mode='free', curDeg=0, spinning=false;
+  var spins=0, coinsWon=0, spent=0, jackpots=0;
   var price=1.99, conv=0.02, dau=1000000;
 
-  drawWheel(wheelEl, FREE);
+  function cfg(){ return mode==='paid'?PREM:FREE; }
+  drawWheel(wheelEl, FREE, 0);
 
   function pick(w){ var r=Math.random(), c=0; for(var i=0;i<w.length;i++){c+=w[i].p; if(r<c)return i;} return w.length-1; }
 
-  function spin(w, cb){
-    spinning=true;
-    var i=pick(w), am=i*STEP+STEP/2;
+  var fb=document.getElementById('feedback');
+  var spinBtn=document.getElementById('spin');
+  var modeFreeBtn=document.getElementById('modeFree'), modePaidBtn=document.getElementById('modePaid');
+
+  function setMode(m){
+    if(spinning)return;
+    mode=m;
+    modeFreeBtn.classList.toggle('active', m==='free');
+    modePaidBtn.classList.toggle('active', m==='paid');
+    spinBtn.innerHTML = (m==='paid') ? 'Spin <span class="cost">'+money(price)+'</span>' : 'Spin';
+    drawWheel(wheelEl, cfg(), curDeg);
+    fb.className='feedback';
+    fb.textContent = (m==='paid') ? 'Paid re-spin. Spin for a richer wheel.' : 'Free daily spin. Spin to win.';
+  }
+  modeFreeBtn.addEventListener('click',function(){ setMode('free'); });
+  modePaidBtn.addEventListener('click',function(){ setMode('paid'); });
+
+  function reward(res){
+    spins++; coinsWon+=res.v;
+    if(res.jackpot)jackpots++;
+    if(mode==='paid'){ spent+=price; document.getElementById('cSpent').textContent=money(spent); }
+    document.getElementById('cSpins').textContent=spins;
+    document.getElementById('cCoins').textContent=coinsShort(coinsWon);
+    document.getElementById('cJack').textContent=jackpots;
+    var label = res.wild?'a Wildcard (~22,000 coins)':fmt(res.v)+' coins';
+    if(res.jackpot){ fb.className='feedback jackpot'; fb.innerHTML='JACKPOT &nbsp;<span class="amt">'+fmt(res.v)+' coins</span>'; }
+    else if(res.near){ fb.className='feedback near'; fb.innerHTML='So close to the jackpot &nbsp;<span class="amt">'+fmt(res.v)+' coins</span>'; }
+    else { fb.className='feedback'; fb.innerHTML='You won <span class="amt">'+label+'</span>'; }
+  }
+
+  function doSpin(){
+    if(spinning)return;
+    var w=cfg(), i=pick(w), am=i*STEP+STEP/2;
+    spinning=true; spinBtn.disabled=true;
+    fb.className='feedback'; fb.textContent='Spinning...';
     var desired=(360-(am%360))%360;
     var jitter=(Math.random()*2-1)*(STEP/2-9);
     var delta=5*360 + (((desired-(curDeg%360))%360)+360)%360 + jitter;
     curDeg+=delta;
     var g=wheelEl.querySelector('#wheelRot');
-    if(reduce){ g.style.transform='rotate('+curDeg+'deg)'; setTimeout(function(){spinning=false;cb(w[i]);},120); return; }
+    g.getBoundingClientRect(); // commit current transform before animating
+    if(reduce){ g.style.transform='rotate('+curDeg+'deg)'; setTimeout(function(){ spinning=false; spinBtn.disabled=false; reward(w[i]); },120); return; }
     g.style.transform='rotate('+curDeg+'deg)';
     var done=false;
-    function fin(){ if(done)return; done=true; spinning=false; cb(w[i]); }
+    function fin(){ if(done)return; done=true; spinning=false; spinBtn.disabled=false; reward(w[i]); }
     g.addEventListener('transitionend',fin,{once:true});
     setTimeout(fin,4900);
   }
-
-  var fb=document.getElementById('feedback');
-  var offer=document.getElementById('offer'), offerLine=document.getElementById('offerLine');
-  var spinFreeBtn=document.getElementById('spinFree'), spinPremBtn=document.getElementById('spinPrem'), skipBtn=document.getElementById('skip');
-  var modeBadge=document.getElementById('modeBadge');
-
-  function setBadge(m){
-    if(m==='prem'){modeBadge.textContent='Premium re-spin';modeBadge.className='mode-badge mode-prem';}
-    else{modeBadge.textContent='Free daily spin';modeBadge.className='mode-badge mode-free';}
-  }
-  function reward(res, paid){
-    coinsWon+=res.v;
-    if(res.jackpot)jackpots++;
-    document.getElementById('cCoins').textContent=coinsShort(coinsWon);
-    document.getElementById('cJack').textContent=jackpots;
-    var label = res.wild?'a Wildcard (worth ~22,000)':fmt(res.v)+' coins';
-    if(res.jackpot){ fb.className='feedback jackpot'; fb.innerHTML='JACKPOT &nbsp;<span class="amt">'+fmt(res.v)+' coins</span>'; }
-    else { fb.className='feedback'; fb.innerHTML='You won <span class="amt">'+label+'</span>'; }
-  }
-
-  spinFreeBtn.addEventListener('click',function(){
-    if(spinning)return;
-    setBadge('free'); offer.classList.remove('show'); spinFreeBtn.disabled=true;
-    fb.className='feedback'; fb.textContent='Spinning...';
-    spin(FREE,function(res){
-      reward(res,false);
-      // premium offer, near-miss framing
-      if(res.near){ offerLine.innerHTML='So close. One wedge from the <b>300,000 jackpot</b>. The premium wheel doubles the jackpot to <b>750,000</b> and lifts the floor. Spin again?'; fb.className='feedback near'; fb.innerHTML='So close to the jackpot &nbsp;<span class="amt">'+fmt(res.v)+' coins</span>'; }
-      else if(res.jackpot){ offerLine.innerHTML='You hit it. The premium wheel carries a <b>750,000</b> jackpot and better odds across the board. Press your luck?'; }
-      else { offerLine.innerHTML='Upgrade the spin. The premium wheel pays <b>~28,000</b> on average, lifts the floor to 8,000, and carries a <b>750,000</b> jackpot.'; }
-      offer.classList.add('show');
-    });
-  });
-
-  spinPremBtn.addEventListener('click',function(){
-    if(spinning)return;
-    setBadge('prem'); offer.classList.remove('show');
-    spent+=price; document.getElementById('cSpent').textContent=money(spent);
-    fb.className='feedback'; fb.textContent='Spinning the premium wheel...';
-    drawWheel(wheelEl,PREM);
-    spin(PREM,function(res){ reward(res,true); newDay(); });
-  });
-
-  function newDay(){
-    days++; document.getElementById('cDays').textContent=days;
-    setTimeout(function(){
-      setBadge('free'); drawWheel(wheelEl,FREE); offer.classList.remove('show');
-      spinFreeBtn.disabled=false;
-      if(fb.className.indexOf('jackpot')<0 && fb.className.indexOf('near')<0){ /* keep last result visible briefly */ }
-    }, 1100);
-  }
-  skipBtn.addEventListener('click',function(){ if(spinning)return; offer.classList.remove('show'); newDay(); fb.className='feedback'; fb.textContent='New day. Spin the free wheel.'; });
+  spinBtn.addEventListener('click',doSpin);
 
   // ---- economy panel ----
   var sPrice=document.getElementById('sPrice'), sConv=document.getElementById('sConv'), sDau=document.getElementById('sDau');
@@ -350,94 +313,68 @@
     document.getElementById('vPrice').textContent=money(price);
     document.getElementById('vConv').textContent=(conv*100).toFixed(1)+'%';
     document.getElementById('vDau').textContent=(dau/1e6).toFixed(1)+'M';
-    document.getElementById('hNum').textContent=fmt(PREM_EV);
-    document.getElementById('hPm').textContent='coins · '+money(PREM_EV/REF_RATE);
-    document.getElementById('hFree').textContent=fmt(FREE_EV);
-    document.getElementById('sFreeEv').textContent=fmt(FREE_EV);
-    document.getElementById('sFreeEvD').textContent='~'+money(FREE_EV/REF_RATE)+' · half the pack';
-    var refCoins=price*REF_RATE, vs=PREM_EV/refCoins-1;
-    var vsEl=document.getElementById('sVsPack');
-    vsEl.textContent=(vs>=0?'+':'')+(vs*100).toFixed(0)+'%';
-    vsEl.className='v gold';
+    if(mode==='paid'){ spinBtn.innerHTML='Spin <span class="cost">'+money(price)+'</span>'; }
+
     var rev=dau*conv*price;
-    document.getElementById('sRev').textContent=dollarsShort(rev);
-    document.getElementById('sRevD').textContent=money(price)+' × '+(conv*100).toFixed(1)+'% × '+coinsShort(dau).replace('K','k');
-    var faucet=dau*(FREE_EV+conv*PREM_EV);
-    document.getElementById('sFaucet').textContent=coinsShort(faucet);
+    document.getElementById('hRev').textContent=dollarsShort(rev);
+    document.getElementById('hDau').textContent=(dau/1e6).toFixed(1)+'M';
+    document.getElementById('hConv').textContent=(conv*100).toFixed(1)+'%';
+
+    document.getElementById('sArpdau').textContent='$'+(conv*price).toFixed(3);
+    var vs=PREM_EV/(price*REF_RATE)-1;
+    document.getElementById('sVsPack').textContent=(vs>=0?'+':'')+(vs*100).toFixed(0)+'%';
+    document.getElementById('sMargin').textContent=money(price);
+    document.getElementById('sFaucet').textContent=coinsShort(dau*(FREE_EV+conv*PREM_EV));
+    document.getElementById('sFreeEv').textContent=fmt(FREE_EV);
+    document.getElementById('sFreeEvD').textContent='~'+money(FREE_EV/REF_RATE)+' · half a pack';
+    document.getElementById('sPaidEv').textContent=fmt(PREM_EV);
   }
   sPrice.addEventListener('input',refreshEconomy);
   sConv.addEventListener('input',refreshEconomy);
   sDau.addEventListener('input',refreshEconomy);
-  refreshEconomy();
 
-  // ---- monte carlo ----
-  var cv=document.getElementById('hist'), ctx=cv.getContext('2d');
-  var lastSim=null;
-  function sizeCanvas(){ var w=cv.clientWidth||440; cv.width=w*2; cv.height=170*2; ctx.setTransform(2,0,0,2,0,0); return w; }
-  function drawHist(counts, total, mean, median){
-    var W=sizeCanvas(), H=170; ctx.clearRect(0,0,W,H);
-    var pad={l:8,r:8,t:10,b:26}, n=PREM.length;
-    var order=PREM.map(function(d,i){return i;}).sort(function(a,b){return PREM[a].v-PREM[b].v;});
-    var max=1; for(var i=0;i<counts.length;i++)max=Math.max(max,counts[i]);
-    var bw=(W-pad.l-pad.r)/n, gap=bw*0.22;
+  // ---- distribution charts (exact, from the wheel config) ----
+  function sizeCanvas(cv,ctx){ var w=cv.clientWidth||440; cv.width=w*2; cv.height=150*2; ctx.setTransform(2,0,0,2,0,0); return w; }
+  function drawDist(cv, w){
+    var ctx=cv.getContext('2d'), W=sizeCanvas(cv,ctx), H=150; ctx.clearRect(0,0,W,H);
+    var pad={l:8,r:8,t:12,b:24}, n=w.length;
+    var order=w.map(function(d,i){return i;}).sort(function(a,b){return w[a].v-w[b].v;});
+    var max=0; for(var i=0;i<w.length;i++)max=Math.max(max,w[i].p);
+    var bw=(W-pad.l-pad.r)/n, gap=bw*0.24;
     for(var k=0;k<n;k++){
-      var idx=order[k], c=counts[idx], h=(H-pad.t-pad.b)*(c/max);
-      var x=pad.l+k*bw+gap/2, y=H-pad.b-h, w=bw-gap;
-      ctx.fillStyle = PREM[idx].jackpot?GOLD:'#33507e';
-      ctx.fillRect(x,y,w,Math.max(h,c>0?2:0));
-      ctx.fillStyle='#64718C'; ctx.font='9px "JetBrains Mono",monospace'; ctx.textAlign='center';
-      ctx.fillText(PREM[idx].label, x+w/2, H-pad.b+13);
+      var idx=order[k], h=(H-pad.t-pad.b)*(w[idx].p/max);
+      var x=pad.l+k*bw+gap/2, y=H-pad.b-h, bwid=bw-gap;
+      ctx.fillStyle = w[idx].jackpot?GOLD:BAR;
+      ctx.fillRect(x,y,bwid,Math.max(h,2));
+      var pct=w[idx].p*100, plabel=(pct>=1?Math.round(pct):pct.toFixed(1))+'%';
+      ctx.fillStyle='#93A0B8'; ctx.font='9px "JetBrains Mono",monospace'; ctx.textAlign='center';
+      ctx.fillText(plabel, x+bwid/2, y-4);
+      ctx.fillStyle='#64718C';
+      ctx.fillText(w[idx].label, x+bwid/2, H-pad.b+13);
     }
     ctx.fillStyle='#26385C'; ctx.fillRect(pad.l,H-pad.b,W-pad.l-pad.r,1);
   }
-  function chartEmpty(){ var W=sizeCanvas(),H=170; ctx.clearRect(0,0,W,H); ctx.fillStyle='#64718C'; ctx.font='11px "JetBrains Mono",monospace'; ctx.textAlign='center'; ctx.fillText('Run a simulation to populate', W/2, H/2); }
-  chartEmpty();
+  var histFree=document.getElementById('histFree'), histPaid=document.getElementById('histPaid');
+  function drawCharts(){ drawDist(histFree,FREE); drawDist(histPaid,PREM); }
 
-  function median(arr){ if(!arr.length)return 0; var a=arr.slice().sort(function(x,y){return x-y;}); var m=Math.floor(a.length/2); return a.length%2?a[m]:(a[m-1]+a[m])/2; }
-
-  function runSim(nPlayers){
-    var counts=new Array(PREM.length).fill(0);
-    var premPayouts=[], converted=0, freeSum=0, premSum=0, big=0;
-    for(var u=0;u<nPlayers;u++){
-      freeSum+=FREE[pick(FREE)].v;
-      if(Math.random()<conv){
-        converted++;
-        var pi=pick(PREM); counts[pi]++; var val=PREM[pi].v;
-        premSum+=val; premPayouts.push(val);
-        if(val>=100000)big++;
-      }
-    }
-    var rev=converted*price;
-    var med=median(premPayouts), mean=premPayouts.length?premSum/premPayouts.length:0;
-    document.getElementById('sMedian').textContent=converted?coinsShort(med):'—';
-    var gapEl=document.getElementById('sGap');
-    gapEl.textContent=converted?'+'+coinsShort(mean-med):'—';
-    document.getElementById('chartMeta').innerHTML=converted
-      ? fmt(converted)+' paid spins · mean <b>'+fmt(mean)+'</b> · median <b>'+fmt(med)+'</b>'
-      : 'no paid spins at this conversion';
-    // also reflect observed revenue in the live tiles for this batch scaled to a day handled by sliders already
-    lastSim={c:counts,n:converted,mean:mean,med:med};
-    drawHist(counts, converted, mean, med);
-  }
-  var autoBtns=document.querySelectorAll('.auto-btns button');
-  for(var b=0;b<autoBtns.length;b++){ autoBtns[b].addEventListener('click',function(){ runSim(parseInt(this.getAttribute('data-n'),10)); }); }
+  // set chart captions (exact mean/median)
+  document.getElementById('metaFree').innerHTML='mean <b>'+fmt(FREE_EV)+'</b> · median <b>'+fmt(FREE_MED)+'</b>';
+  document.getElementById('metaPaid').innerHTML='mean <b>'+fmt(PREM_EV)+'</b> · median <b>'+fmt(PREM_MED)+'</b>';
 
   // ---- reset ----
   document.getElementById('reset').addEventListener('click',function(){
-    days=0;coinsWon=0;spent=0;jackpots=0;curDeg=0;mode='free';spinning=false;
-    document.getElementById('cDays').textContent='0';
+    spins=0;coinsWon=0;spent=0;jackpots=0;curDeg=0;spinning=false;
+    document.getElementById('cSpins').textContent='0';
     document.getElementById('cCoins').textContent='0';
     document.getElementById('cSpent').textContent='$0.00';
     document.getElementById('cJack').textContent='0';
-    document.getElementById('sMedian').textContent='—';
-    document.getElementById('sGap').textContent='—';
-    document.getElementById('chartMeta').textContent='run a simulation';
-    setBadge('free'); drawWheel(wheelEl,FREE); offer.classList.remove('show'); spinFreeBtn.disabled=false;
-    fb.className='feedback'; fb.textContent='Spin the free wheel to start the day.';
-    lastSim=null; chartEmpty();
+    setMode('free');
+    fb.className='feedback'; fb.textContent='Pick a wheel and spin.';
   });
 
-  window.addEventListener('resize',function(){ if(lastSim) drawHist(lastSim.c,lastSim.n,lastSim.mean,lastSim.med); else chartEmpty(); });
+  window.addEventListener('resize',drawCharts);
+  refreshEconomy();
+  drawCharts();
 })();
 </script>
 </body>
