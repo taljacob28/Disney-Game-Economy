@@ -97,6 +97,13 @@
   .stat .v.ok{color:var(--win)} .stat .v.gold{color:var(--gold)}
   .stat .sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
 
+  .pctl-block{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:16px}
+  .pctl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+  .pctl-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .pctl-val{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold)}
+  .pctl-read{display:flex;justify-content:space-between;margin-top:11px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .pctl-read b{color:var(--ink);font-weight:700}
+  .pctl-note{font-family:var(--mono);font-size:10px;color:var(--muted2);margin-top:7px}
   .chartblock{margin-bottom:16px}
   .chart-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;gap:10px}
   .chart-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -170,6 +177,12 @@
         <div class="stat"><div class="k">Paid wheel EV</div><div class="v gold" id="sPaidEv">28,180</div><div class="sub" id="sPaidEvD">~$1.88 per spin</div></div>
       </div>
 
+      <div class="pctl-block">
+        <div class="pctl-head"><span class="pctl-label">Percentile lens</span><span class="pctl-val" id="vPctl">p50</span></div>
+        <input type="range" id="sPctl" min="1" max="99" step="1" value="50">
+        <div class="pctl-read"><span>Free wheel <b id="pctlFree">6,000</b></span><span>Paid wheel <b id="pctlPaid">16,000</b></span></div>
+        <div class="pctl-note" id="pctlNote">p50 of spins pay this many coins or less</div>
+      </div>
       <div class="chartblock">
         <div class="chart-head"><span class="chart-title">Free wheel · payout distribution</span><span class="chart-meta" id="metaFree">mean <b>15,030</b> · median <b>6,000</b></span></div>
         <canvas id="histFree" height="150"></canvas>
@@ -217,6 +230,12 @@
   function medianOf(w){
     var a=w.slice().sort(function(x,y){return x.v-y.v;}), c=0;
     for(var i=0;i<a.length;i++){c+=a[i].p; if(c>=0.5)return a[i].v;}
+    return a[a.length-1].v;
+  }
+  function quantile(w,p){
+    var a=w.slice().sort(function(x,y){return x.v-y.v;});
+    var tot=a.reduce(function(s,d){return s+d.p;},0)||1, c=0;
+    for(var i=0;i<a.length;i++){c+=a[i].p/tot; if(c>=p-1e-9)return a[i].v;}
     return a[a.length-1].v;
   }
   var FREE_EV, PREM_EV, FREE_MED, PREM_MED;
@@ -380,19 +399,26 @@
 
   // ---- distribution charts ----
   function sizeCanvas(cv,ctx){ var w=cv.clientWidth||440; cv.width=w*2; cv.height=150*2; ctx.setTransform(2,0,0,2,0,0); return w; }
-  function drawDist(cv,w){
+  function drawDist(cv,w,pctl){
     var ctx=cv.getContext('2d'), W=sizeCanvas(cv,ctx), H=150; ctx.clearRect(0,0,W,H);
-    var pad={l:8,r:8,t:14,b:24}, n=w.length;
+    var pad={l:8,r:8,t:18,b:24}, n=w.length;
     var tot=w.reduce(function(s,d){return s+d.p;},0)||1;
     var order=w.map(function(d,i){return i;}).sort(function(a,b){return w[a].v-w[b].v;});
     var max=0; for(var i=0;i<n;i++)max=Math.max(max,w[i].p/tot);
     if(max<=0)max=1;
-    var bw=(W-pad.l-pad.r)/n, gap=bw*0.24;
+    var bw=(W-pad.l-pad.r)/n, gap=bw*0.24, cum=0, marked=false;
     for(var k=0;k<n;k++){
       var idx=order[k], pn=w[idx].p/tot, h=(H-pad.t-pad.b)*(pn/max);
       var x=pad.l+k*bw+gap/2, y=H-pad.b-h, bwid=bw-gap;
       ctx.fillStyle = w[idx].jackpot?GOLD:BAR;
       ctx.fillRect(x,y,bwid,Math.max(h,2));
+      cum+=pn;
+      if(pctl!=null && !marked && cum>=pctl-1e-9){
+        marked=true;
+        ctx.strokeStyle='#ECEFF4'; ctx.lineWidth=2; ctx.strokeRect(x-1,y-1,bwid+2,Math.max(h,2)+1);
+        ctx.fillStyle='#ECEFF4'; ctx.beginPath();
+        ctx.moveTo(x+bwid/2-4,pad.t-9); ctx.lineTo(x+bwid/2+4,pad.t-9); ctx.lineTo(x+bwid/2,pad.t-3); ctx.closePath(); ctx.fill();
+      }
       var pct=pn*100, plabel=(pct>=1?Math.round(pct):pct.toFixed(1))+'%';
       ctx.fillStyle='#93A0B8'; ctx.font='9px "JetBrains Mono",monospace'; ctx.textAlign='center';
       ctx.fillText(plabel, x+bwid/2, y-4);
@@ -403,13 +429,20 @@
   }
   var histFree=document.getElementById('histFree'), histPaid=document.getElementById('histPaid');
 
+  var sPctl=document.getElementById('sPctl');
   function refreshAll(){
     FREE_EV=ev(FREE); PREM_EV=ev(PREM); FREE_MED=medianOf(FREE); PREM_MED=medianOf(PREM);
+    var pn=parseInt(sPctl.value,10), p=pn/100;
     refreshEconomy();
-    drawDist(histFree,FREE); drawDist(histPaid,PREM);
+    drawDist(histFree,FREE,p); drawDist(histPaid,PREM,p);
     document.getElementById('metaFree').innerHTML='mean <b>'+fmt(FREE_EV)+'</b> · median <b>'+fmt(FREE_MED)+'</b>';
     document.getElementById('metaPaid').innerHTML='mean <b>'+fmt(PREM_EV)+'</b> · median <b>'+fmt(PREM_MED)+'</b>';
+    document.getElementById('vPctl').textContent='p'+pn;
+    document.getElementById('pctlFree').textContent=fmt(quantile(FREE,p));
+    document.getElementById('pctlPaid').textContent=fmt(quantile(PREM,p));
+    document.getElementById('pctlNote').textContent='p'+pn+' of spins pay this many coins or less';
   }
+  sPctl.addEventListener('input',refreshAll);
 
   // ---- reset all ----
   document.getElementById('reset').addEventListener('click',function(){
@@ -423,7 +456,7 @@
     fb.className='feedback'; fb.textContent='Pick a wheel and spin.';
   });
 
-  window.addEventListener('resize',function(){ drawDist(histFree,FREE); drawDist(histPaid,PREM); });
+  window.addEventListener('resize',function(){ var p=parseInt(sPctl.value,10)/100; drawDist(histFree,FREE,p); drawDist(histPaid,PREM,p); });
 
   // init
   drawWheel(wheelEl, FREE, 0);
